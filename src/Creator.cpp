@@ -5,6 +5,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <iostream>
+#include <File.h>
 
 namespace mini_tar {
     Creator::Creator(std::string_view src, std::string_view dst) {
@@ -29,14 +30,9 @@ namespace mini_tar {
             int append_size = 1 + static_cast<int>(file_name.size());
             path.append("/").append(file_name);
 
-            struct stat st{};
-            if (lstat(path.c_str(), &st) < 0) {
-                throw std::exception();
-            }
-            //if (S_ISREG(st.st_mode)) {
-            std::cout << pref << file_name << '\n';
-            //}
-            if (S_ISDIR(st.st_mode)) {
+            File file(path);
+            std::cout << pref << ' ' << file.name_ << '\n';
+            if (file.is_dir()) {
                 walk(path, pref + "---");
             }
 
