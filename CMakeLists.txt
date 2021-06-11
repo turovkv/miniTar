@@ -22,4 +22,4 @@ add_executable(
         include/FileSerializer.h
         src/FileDeserializer.cpp
         include/FileDeserializer.h
-)
+        src/Extractor.cpp include/Extractor.h)

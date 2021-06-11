@@ -29,12 +29,14 @@ namespace mini_tar {
     class FileInfoViewer {
     private:
         FileInfo file_info_;
-
+        bool is_hard_link_ = false;
     public:
         FileInfoViewer() = delete;
-        explicit FileInfoViewer(FileInfo fileInfo);
+        explicit FileInfoViewer(FileInfo fileInfo, bool is_hard_link);
         bool is_up_flag() const;
         bool is_dir() const;
+        bool is_hard_link() const;
+        std::string name() const;
     };
 
     class FileProcessor {

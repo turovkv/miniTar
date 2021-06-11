@@ -3,8 +3,9 @@
 #include <fcntl.h>
 
 namespace mini_tar {
-    FileInfoViewer::FileInfoViewer(FileInfo fileInfo) {
+    FileInfoViewer::FileInfoViewer(FileInfo fileInfo, bool is_hard_link) {
         file_info_ = fileInfo;
+        is_hard_link_ = is_hard_link;
     }
 
     bool FileInfo::is_up_flag() const {
@@ -21,5 +22,13 @@ namespace mini_tar {
 
     bool FileInfoViewer::is_dir() const {
         return file_info_.is_dir();
+    }
+
+    bool FileInfoViewer::is_hard_link() const {
+        return is_hard_link_;
+    }
+
+    std::string FileInfoViewer::name() const {
+        return std::string(file_info_.name_);
     }
 }

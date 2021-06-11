@@ -83,13 +83,22 @@ namespace mini_tar {
 
     string_view CLI::get_dir_src() {
         if (group_value_.count(dir_src_group)) {
-            return group_value_[dir_src_group].second;
+            string_view ans = group_value_[dir_src_group].second;
+            if (ans.back() == '/') {
+                ans.substr(0, ans.size() - 1);
+            }
+
+            return ans;
         } else {
             return group_default_value_[dir_src_group];
         }
     }
 
     string_view CLI::get_dir_dest() {
-        return anonymous_args_.front();
+        string_view ans = anonymous_args_.front();
+        if (ans.back() == '/') {
+            ans.substr(0, ans.size() - 1);
+        }
+        return ans;
     }
 }

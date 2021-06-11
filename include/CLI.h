@@ -41,7 +41,7 @@ namespace mini_tar {
                 {CREATE,        CREATE},
                 {EXTRACT,       EXTRACT},
                 {DIRECTORY,     DIRECTORY},
-                {"--create",    CREATE},
+                {"--extract",    CREATE},
                 {"--extract",   EXTRACT},
                 {"--directory", DIRECTORY},
         };
@@ -60,7 +60,7 @@ namespace mini_tar {
         };
         std::unordered_map<int, string_view> group_default_value_ = {
                 {tar_mode_group, ""},
-                {dir_src_group,  "./"},
+                {dir_src_group,  "."},
         };
 
         std::unordered_map<int, std::pair<string_view, string_view>> group_value_;

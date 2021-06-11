@@ -10,7 +10,7 @@
 namespace mini_tar {
     class FileDeserializer : public FileProcessor {
     private:
-        void writeToDir(const std::string &parentPath, const FileInfo &fileInfo, std::istream &in);
+        FileInfoViewer writeToDir(const std::string &parentPath, const FileInfo &fileInfo, std::istream &in);
 
     public:
         FileDeserializer() = default;
