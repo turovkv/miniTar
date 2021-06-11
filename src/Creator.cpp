@@ -7,6 +7,13 @@ namespace mini_tar {
     Creator::Creator(std::string_view src, std::string_view dst) {
         src_ = src;
         dst_ = dst;
+        size_t begin = dst.size();
+        while (begin > 0 && dst[begin - 1] != '/') {
+            begin--;
+        }
+        for (size_t i = begin; i < dst.size(); i++) {
+            archiveName.push_back(dst[i]);
+        }
     }
 
     void Creator::create() {
@@ -22,7 +29,7 @@ namespace mini_tar {
         struct dirent *dir_entry;
         while ((dir_entry = readdir(dir))) {
             std::string_view file_name(dir_entry->d_name);
-            if (file_name == "." || file_name == "..") {
+            if (file_name == "." || file_name == ".." || file_name == archiveName) {
                 continue;
             }
 

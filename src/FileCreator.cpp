@@ -6,10 +6,12 @@
 #include <fcntl.h>
 #include <iostream>
 #include <fstream>
+#include <cerrno>
+#include <cstring>
 
 namespace mini_tar {
     TarException FileCreator::getException(const std::string &what, const std::string &path) {
-        return TarException("FileCreator: " + what + ": errno = " + std::to_string(errno) + ", path = " + path);
+        return TarException("FileCreator: " + what + ": error = " + std::strerror(errno) + ", path = " + path);
     }
 
     void FileCreator::setMetadata(const FileInfo &fileInfo, const std::string &path) {

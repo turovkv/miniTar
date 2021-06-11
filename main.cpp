@@ -1,5 +1,6 @@
 #include <iostream>
 #include <MiniTar.h>
+#include <Extractor.h>
 #include "CLI.h"
 #include "Creator.h"
 
@@ -16,7 +17,11 @@ int main(int argc, char* argv[]) {
                     );
             c.create();
         } else {
-            std::cout << "lol\n";
+            mini_tar::Extractor e(
+                    parser.get_dir_src(),
+                    parser.get_dir_dest()
+            );
+            e.extract();
         }
     } catch (mini_tar::CLIException &e) {
         std::cout << e.what() << std::endl;
