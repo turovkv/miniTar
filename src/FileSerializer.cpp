@@ -32,14 +32,13 @@ namespace mini_tar {
         out.write(fileInfo.name_, fileInfo.name_size_);
         out.write(reinterpret_cast<char *>(&fileInfo.stat_), sizeof(fileInfo.stat_));
 
-        if (!links.count({fileInfo.stat_.st_dev, fileInfo.stat_.st_ino})) {
-            if ((S_ISREG(fileInfo.stat_.st_mode) || S_ISLNK(fileInfo.stat_.st_mode))
-                && fileInfo.stat_.st_size > 0) {
-                std::ifstream in(path, std::ios::binary);
-                out << in.rdbuf(); //??
-            }
-            links[{fileInfo.stat_.st_dev, fileInfo.stat_.st_ino}] = path;
+        if (links.count({fileInfo.stat_.st_dev, fileInfo.stat_.st_ino})) { return; }
+        if ((S_ISREG(fileInfo.stat_.st_mode) || S_ISLNK(fileInfo.stat_.st_mode))
+            && fileInfo.stat_.st_size > 0) {
+            std::ifstream in(path, std::ios::binary);
+            out << in.rdbuf(); //??
         }
+        links[{fileInfo.stat_.st_dev, fileInfo.stat_.st_ino}] = path;
     }
 
     void FileSerializer::write_up_flag(std::ostream &out) {

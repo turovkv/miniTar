@@ -1,4 +1,5 @@
 #include <iostream>
+#include <MiniTar.h>
 #include "CLI.h"
 #include "Creator.h"
 
@@ -15,11 +16,14 @@ int main(int argc, char* argv[]) {
                     );
             c.create();
         } else {
-
+            std::cout << "lol\n";
         }
     } catch (mini_tar::CLIException &e) {
         std::cout << e.what() << std::endl;
-        return 1;
+        return -2;
+    } catch (mini_tar::TarException &e) {
+        std::cout << e.what() << std::endl;
+        return -1;
     } catch (...) {
         throw ;
     }

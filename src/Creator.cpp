@@ -1,11 +1,7 @@
 #include <vector>
 #include "Creator.h"
-
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <dirent.h>
 #include <iostream>
-#include <FileProcessor.h>
 
 namespace mini_tar {
     Creator::Creator(std::string_view src, std::string_view dst) {
@@ -14,8 +10,8 @@ namespace mini_tar {
     }
 
     void Creator::create() {
-        std::string path(src_);
-        walk(path);
+        ofs_ = std::ofstream(dst_, std::ios::binary);
+        walk(src_);
     }
 
     void Creator::walk(std::string &path) {
@@ -38,7 +34,7 @@ namespace mini_tar {
 
             path.erase(path.size() - append_size, append_size);
         }
-        fs_.write_up_flag(ofs_);
+        mini_tar::FileSerializer::write_up_flag(ofs_);
         closedir(dir);
     }
 }

@@ -9,11 +9,11 @@
 namespace mini_tar {
     class FileSerializer : public FileProcessor {
     private:
-        FileInfo get_file_info(const std::string &path);
+        static FileInfo get_file_info(const std::string &path);
 
     public:
         FileSerializer() = default;
-        void write_up_flag(std::ostream &out);
+        static void write_up_flag(std::ostream &out);
         void serialize(const std::string &path, std::ostream &out);
     };
 }

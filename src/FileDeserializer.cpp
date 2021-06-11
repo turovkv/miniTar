@@ -1,18 +1,11 @@
 #include "FileProcessor.h"
 #include <iostream>
 #include <sys/stat.h>
-#include <FileSerializer.h>
 #include <FileDeserializer.h>
 #include <string>
 #include "FileCreator.h"
-#include "MiniTar.h"
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <fcntl.h>
-#include <ctime>
-#include <iostream>
-#include <fstream>
+
 
 namespace mini_tar {
     void FileDeserializer::writeToDir(const std::string &parentPath, const FileInfo &fileInfo, std::istream &in) {

@@ -16,7 +16,7 @@ namespace mini_tar {
         if (lchown(path.c_str(), fileInfo.stat_.st_uid, fileInfo.stat_.st_gid) < 0) {
             throw getException("setMetadata: gid uid", path);
         }
-        if (lchmod(path.c_str(), fileInfo.stat_.st_mode) < 0) {
+        if (!S_ISLNK(fileInfo.stat_.st_mode) && chmod(path.c_str(), fileInfo.stat_.st_mode) < 0) {
             throw getException("setMetadata: mode", path);
         }
         struct timespec buf[2] = {fileInfo.stat_.st_atim, fileInfo.stat_.st_mtim};
