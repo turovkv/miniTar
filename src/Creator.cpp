@@ -5,7 +5,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <iostream>
-#include <File.h>
+#include <FileProcessor.h>
 
 namespace mini_tar {
     Creator::Creator(std::string_view src, std::string_view dst) {
@@ -18,8 +18,11 @@ namespace mini_tar {
         walk(path);
     }
 
-    void Creator::walk(std::string &path, std::string pref) {
+    void Creator::walk(std::string &path) {
         DIR *dir = opendir(path.c_str());
+        if (dir == nullptr) {
+            return; // TODO errno ENOTDIR
+        }
         struct dirent *dir_entry;
         while ((dir_entry = readdir(dir))) {
             std::string_view file_name(dir_entry->d_name);
@@ -27,17 +30,15 @@ namespace mini_tar {
                 continue;
             }
 
-            int append_size = 1 + static_cast<int>(file_name.size());
+            size_t append_size = 1 + file_name.size();
             path.append("/").append(file_name);
 
-            File file(path);
-            std::cout << pref << ' ' << file.name_ << '\n';
-            if (file.is_dir()) {
-                walk(path, pref + "---");
-            }
+            fs_.serialize(path, ofs_);
+            walk(path);
 
             path.erase(path.size() - append_size, append_size);
         }
+        fs_.write_up_flag(ofs_);
         closedir(dir);
     }
 }
