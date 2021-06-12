@@ -16,8 +16,6 @@ add_executable(
         include/CLI.h
         src/Creator.cpp
         include/Creator.h
-        src/FileCreator.cpp
-        include/FileCreator.h
         src/FileSerializer.cpp
         include/FileSerializer.h
         src/FileDeserializer.cpp

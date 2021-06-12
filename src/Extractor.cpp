@@ -36,5 +36,6 @@ namespace mini_tar {
                 moveToParentPath(parentPath);
             }
         }
+        fd_.setTimes();
     }
 }
