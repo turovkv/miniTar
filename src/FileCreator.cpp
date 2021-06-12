@@ -39,14 +39,16 @@ namespace mini_tar {
     }
 
     std::string
-    FileCreator::getFileContent(const FileInfo &fileInfo, const std::string &path, std::istream &in) {
+    FileCreator::getSymLinkPath(const FileInfo &fileInfo, const std::string &path, std::istream &in) {
         std::string ans;
         for (int i = 0; i < fileInfo.stat_.st_size; i++) {
             ans.push_back(in.get()); // TODO fuuuuuuuuuck
         }
         if (in.fail()) {
-            throw getException("getFileContent (symlink)", path);
+            throw getException("getSymLinkPath (symlink)", path);
         }
+        //std::cout << "smlk - " << ans << '\n';
+
         return ans;
     }
 
@@ -57,7 +59,7 @@ namespace mini_tar {
     }
 
     void FileCreator::createSymlink(const FileInfo &fileInfo, const std::string &path, std::istream &in) {
-        std::string to = getFileContent(fileInfo, path, in);
+        std::string to = getSymLinkPath(fileInfo, path, in);
         if (symlink(to.c_str(), path.c_str()) < 0) {
             throw getException("createSymlink", path);
         }

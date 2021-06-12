@@ -36,11 +36,13 @@ namespace mini_tar {
             size_t append_size = 1 + file_name.size();
             path.append("/").append(file_name);
 
+            //std::cout << file_name << '\n';
             fs_.serialize(path, ofs_);
             walk(path);
 
             path.erase(path.size() - append_size, append_size);
         }
+        //std::cout << "UP" << '\n';
         mini_tar::FileSerializer::write_up_flag(ofs_);
         closedir(dir);
     }

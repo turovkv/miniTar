@@ -22,6 +22,10 @@ namespace mini_tar {
         std::string parentPath(src_);
         while (true) {
             FileInfoViewer fiw = fd_.deserialize(parentPath, ifs_);
+//            //std::cout << "deserialize - " << fiw.name() << ' ';
+//            //std::cout << "is dir - " << fiw.is_dir() << ' ';
+//            //std::cout << "is up - " << fiw.is_up_flag() << ' ';
+//            //std::cout << "is hl - " << fiw.is_hard_link() << '\n';
             if (fiw.is_dir() && !fiw.is_hard_link()) {
                 parentPath += "/" + fiw.name();
             }

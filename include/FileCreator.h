@@ -10,7 +10,7 @@ namespace mini_tar {
 
         static void setMetadata(const FileInfo &fileInfo, const std::string &path);
         static void writeFileContent(const FileInfo &fileInfo, const std::string &path, std::istream &in);
-        static std::string getFileContent(const FileInfo &fileInfo, const std::string &path, std::istream &in);
+        static std::string getSymLinkPath(const FileInfo &fileInfo, const std::string &path, std::istream &in);
 
         static void createHardlink(const std::string &linkedFileName, const std::string &path);
         static void createRegularFile(const FileInfo &fileInfo, const std::string &path, std::istream &in);
