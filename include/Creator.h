@@ -9,8 +9,8 @@ namespace mini_tar {
     private:
         std::string src_;
         std::string dst_;
-        std::ofstream ofs_;
-        FileSerializer fs_;
+        std::ofstream outputStream_;
+        FileSerializer fileSerializer_;
         std::string archiveName;
 
     public:

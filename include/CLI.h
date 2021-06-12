@@ -41,7 +41,7 @@ namespace mini_tar {
                 {CREATE,        CREATE},
                 {EXTRACT,       EXTRACT},
                 {DIRECTORY,     DIRECTORY},
-                {"--extract",    CREATE},
+                {"--extract",   CREATE},
                 {"--extract",   EXTRACT},
                 {"--directory", DIRECTORY},
         };

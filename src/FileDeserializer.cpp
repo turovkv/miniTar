@@ -1,18 +1,14 @@
-#include "FileProcessor.h"
 #include <iostream>
 #include <sys/stat.h>
-#include <FileDeserializer.h>
 #include <string>
 #include <fcntl.h>
-#include <string>
-#include "MiniTar.h"
 #include <unistd.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <iostream>
 #include <fstream>
 #include <cerrno>
 #include <cstring>
+#include "TarException.h"
+#include "FileProcessor.h"
+#include <FileDeserializer.h>
 
 
 namespace mini_tar {
@@ -20,7 +16,6 @@ namespace mini_tar {
     FileDeserializer::writeToDir(const std::string &parentPath, const FileInfo &fileInfo, std::istream &in) {
         std::string path = parentPath + "/" + fileInfo.name_;
 
-        //std::cout << "inod sz - " << fileInfo.stat_.st_size << '\n';
         if (links.count({fileInfo.stat_.st_dev, fileInfo.stat_.st_ino})) {
             std::string &link = links[{fileInfo.stat_.st_dev, fileInfo.stat_.st_ino}];
             createHardlink(link, path);
@@ -41,18 +36,13 @@ namespace mini_tar {
 
     FileInfoViewer FileDeserializer::deserialize(const std::string &parentPath, std::istream &in) {
         FileInfo fileInfo;
-        //in >> fileInfo.name_size_;
-        in.read(reinterpret_cast<char *>(&fileInfo.name_size_), sizeof(fileInfo.name_size_));
-        //std::cout << "sz - " << fileInfo.name_size_ << '\n';
+        in.read(reinterpret_cast<char *>(&fileInfo.nameSize_), sizeof(fileInfo.nameSize_));
 
-        if (fileInfo.is_up_flag()) {
-            //std::cout << "UP\n";
+        if (fileInfo.isUpFlag()) {
             return FileInfoViewer(fileInfo, false);
         }
-        in.read(fileInfo.name_, fileInfo.name_size_);
-        //std::cout << "name - " << fileInfo.name_ << '\n';
+        in.read(fileInfo.name_, fileInfo.nameSize_);
         in.read(reinterpret_cast<char *>(&fileInfo.stat_), sizeof(fileInfo.stat_));
-        ////std::cout << "read name > " << fileInfo.name_ << '\n';
 
         return writeToDir(parentPath, fileInfo, in);
     }
@@ -104,7 +94,6 @@ namespace mini_tar {
         if (in.fail()) {
             throw getException("getSymLinkPath (symlink)", path);
         }
-        //std::cout << "smlk - " << ans << '\n';
 
         return ans;
     }

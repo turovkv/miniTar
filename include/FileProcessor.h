@@ -17,26 +17,26 @@ namespace mini_tar {
 
     class FileInfo {
     public:
-        uint32_t name_size_{};
+        uint32_t nameSize_{};
         char name_[256]{};
         struct stat stat_{};
 
     public:
-        bool is_up_flag() const;
-        bool is_dir() const;
+        bool isUpFlag() const;
+        bool isDir() const;
     };
 
     class FileInfoViewer {
     private:
-        FileInfo file_info_;
-        bool is_hard_link_ = false;
+        FileInfo fileInfo_;
+        bool isHardLink_ = false;
     public:
         FileInfoViewer() = delete;
-        explicit FileInfoViewer(FileInfo fileInfo, bool is_hard_link);
-        bool is_up_flag() const;
-        bool is_dir() const;
-        bool is_hard_link() const;
-        std::string name() const;
+        explicit FileInfoViewer(FileInfo fileInfo, bool isHardLink);
+        bool isUpFlag() const;
+        bool isDir() const;
+        bool isHardLink() const;
+        std::string getName() const;
     };
 
     class FileProcessor {

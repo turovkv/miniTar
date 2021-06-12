@@ -7,8 +7,4 @@ namespace mini_tar {
     public:
         explicit TarException(std::string_view message);
     };
-
-    class MiniTar {
-
-    };
 }

@@ -7,7 +7,7 @@
 #include <vector>
 #include <functional>
 #include "FileProcessor.h"
-#include "MiniTar.h"
+#include "TarException.h"
 
 namespace mini_tar {
     class FileDeserializer : public FileProcessor {

@@ -10,8 +10,8 @@ add_executable(
         main.cpp
         src/FileProcessor.cpp
         include/FileProcessor.h
-        src/MiniTar.cpp
-        include/MiniTar.h
+        src/TarException.cpp
+        include/TarException.h
         src/CLI.cpp
         include/CLI.h
         src/Creator.cpp
@@ -20,4 +20,6 @@ add_executable(
         include/FileSerializer.h
         src/FileDeserializer.cpp
         include/FileDeserializer.h
-        src/Extractor.cpp include/Extractor.h)
+        src/Extractor.cpp
+        include/Extractor.h
+)
