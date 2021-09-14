@@ -5,7 +5,8 @@ All attributes, righst, and types of files is saved.
 ## Usage 
 -c / --create: create mini-tar  
 -x / --extract: extract mini-tar
--d / --directory <путь>: directory which you want to zip (or unzip). Default - current directory. Must exist  
+-d / --directory <path>: directory which you want to zip (or unzip).
+  Default - current directory. Directory must exist. 
 After flags the only argument is result filename
 ### Examples:  
 ./mini_tar -c -d input/ archive.mTar  
