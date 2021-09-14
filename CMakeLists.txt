@@ -22,4 +22,29 @@ add_executable(
         include/FileDeserializer.h
         src/Extractor.cpp
         include/Extractor.h
+        src/CLI.cpp
+        src/Huffman.cpp
+        src/HuffmanArchiver.cpp
+        src/BitStream.cpp
+        include/Huffman.h
+        include/HuffmanArchiver.h
+        include/BitStream.h
+)
+
+include_directories(${CMAKE_SOURCE_DIR}/include)
+add_executable(
+        test_huffman
+        test/doctest.h
+        test/TestMain.cpp
+        src/CLI.cpp
+        src/Huffman.cpp
+        src/HuffmanArchiver.cpp
+        src/BitStream.cpp
+        include/CLI.h
+        include/Huffman.h
+        include/HuffmanArchiver.h
+        include/BitStream.h
+        test/TestBitStream.cpp
+        test/TestHuffmanArchiver.cpp
+        test/TestHuffman.cpp
 )
