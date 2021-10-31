@@ -77,7 +77,7 @@ namespace mini_tar {
     void FileDeserializer::writeFileContent(const FileInfo &fileInfo, const std::string &path, std::istream &in) {
         std::ofstream ofs(path, std::ios::binary);
         for (int i = 0; i < fileInfo.stat_.st_size; i++) {
-            ofs.put(in.get()); // TODO fuuuuuuuuuck
+            ofs.put(in.get());
         }
         if (in.fail() || ofs.fail()) {
             throw getException("writeFileContent (reg file)", path);
@@ -89,7 +89,7 @@ namespace mini_tar {
     FileDeserializer::getSymLinkPath(const FileInfo &fileInfo, const std::string &path, std::istream &in) {
         std::string ans;
         for (int i = 0; i < fileInfo.stat_.st_size; i++) {
-            ans.push_back(in.get()); // TODO fuuuuuuuuuck
+            ans.push_back(in.get());
         }
         if (in.fail()) {
             throw getException("getSymLinkPath (symlink)", path);

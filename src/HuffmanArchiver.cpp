@@ -29,7 +29,7 @@ namespace HuffmanArchiver {
             frequency[byte]++;
             count_symbols++;
         }
-        if (frequency.empty()) { // топ костыль
+        if (frequency.empty()) {
             frequency[0] = 0;
             frequency[1] = 0;
         }
@@ -100,7 +100,7 @@ namespace HuffmanArchiver {
 
         for (std::size_t i = 0; i < traverse.size(); i++) {
             bool bit;
-            b_in >> bit; //big sad
+            b_in >> bit;
             traverse[i] = bit;
         }
 

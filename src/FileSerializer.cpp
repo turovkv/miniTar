@@ -43,7 +43,7 @@ namespace mini_tar {
         if (links.count({fileInfo.stat_.st_dev, fileInfo.stat_.st_ino})) { return; }
         if (S_ISREG(fileInfo.stat_.st_mode) && fileInfo.stat_.st_size > 0) {
             std::ifstream in(path, std::ios::binary);
-            out << in.rdbuf(); //??
+            out << in.rdbuf();
         } else if (S_ISLNK(fileInfo.stat_.st_mode)) {
             const size_t bufferSize = 1 << 14;
             char buffer[bufferSize];
