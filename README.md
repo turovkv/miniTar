@@ -1,7 +1,7 @@
 # miniTar
 ## Description
 Tar-like applicataion for zipping UNIX files with Huffman compression.  
-All attributes, righst, and types of files is saved.
+All attributes, rights, and types of files are saved.
 ## Usage 
 -c / --create: create mini-tar  
 -x / --extract: extract mini-tar  
